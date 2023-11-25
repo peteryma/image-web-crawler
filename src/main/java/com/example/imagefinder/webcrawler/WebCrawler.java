@@ -46,12 +46,6 @@ public class WebCrawler {
     );
     private Random random = new Random();
 
-    /**
-     * Starts the web crawling process from the specified URL with the given depth.
-     *
-     * @param url   the URL to start crawling from
-     * @param depth the depth of the crawling process
-     */
     public void startCrawl(String url, int depth) {
         try {
             url = formatUrl(url);
