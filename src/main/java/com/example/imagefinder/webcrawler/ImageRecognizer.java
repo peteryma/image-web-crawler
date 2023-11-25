@@ -27,14 +27,14 @@ public class ImageRecognizer {
         OpenCV.loadShared();
     }
 
-    public void recognizeFaces(String[] imageUrls, List<String> faceUrls, List<String> nonFaceUrls, List<String> svgUrls) {
+    public void recognizeFaces(String[] imageUrls, List<String> faceUrls, List<String> svgUrls, List<String> restUrls) {
         ExecutorService threadPool = Executors.newFixedThreadPool(10);
         AtomicInteger activeTaskCount = new AtomicInteger(0);
 
-
         List<String> synchronizedFaceUrls = Collections.synchronizedList(faceUrls);
-        List<String> synchronizedNonFaceUrls = Collections.synchronizedList(nonFaceUrls);
         List<String> synchronizedSvgUrls = Collections.synchronizedList(svgUrls);
+        List<String> synchronizedRestUrls = Collections.synchronizedList(restUrls);
+
 
         for (String imageUrl : imageUrls) {
             threadPool.submit(() -> {
@@ -45,7 +45,7 @@ public class ImageRecognizer {
                 } else if (isFace(imageUrl)) {
                     synchronizedFaceUrls.add(imageUrl);
                 } else {
-                    synchronizedNonFaceUrls.add(imageUrl);
+                    synchronizedRestUrls.add(imageUrl);
                 }
 
                 activeTaskCount.decrementAndGet();
@@ -68,7 +68,7 @@ public class ImageRecognizer {
     }
 
     private boolean isFace(String imageUrl) {
-        String tempFileName = java.util.UUID.randomUUID().toString() + ".jpg";
+        String tempFileName = "/" + java.util.UUID.randomUUID().toString() + ".jpg";
 
         try {
             URL url = new URL(imageUrl);

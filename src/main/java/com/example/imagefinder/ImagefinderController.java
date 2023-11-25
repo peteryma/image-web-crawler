@@ -19,27 +19,27 @@ public class ImagefinderController {
         this.imagefinderService = imagefinderService;
     }
 
-    @GetMapping("/searches")
-    public List<ImageSearch> getSearches() {
-        return imagefinderService.getSearches();
+    @GetMapping("/results")
+    public List<ImageSearch> getResults() {
+        return imagefinderService.getResults();
     }
 
-    @GetMapping("/results/{id}")
-    public ImageSearchResult getSearchResult(@PathVariable Long id) {
-        return imagefinderService.getSearchResult(id);
+    @GetMapping("/images/{id}")
+    public ImageSearchResult getImage(@PathVariable Long id) {
+        return imagefinderService.getImage(id);
     }
 
 
     @PostMapping
     public ResponseEntity<String[]> searchUrl(@RequestParam("url") String url,
-                              @RequestParam("depth") Integer depth) {
+                              @RequestParam("depth") Integer depth, @RequestParam("imgRec") Boolean imgRec) {
         if (!activeRequest.compareAndSet(false, true)) {
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
                                  .body(new String[]{"Another request is currently being processed. Please try again later."});
         }
 
         try {
-            return ResponseEntity.ok(imagefinderService.searchUrl(url, depth));
+            return ResponseEntity.ok(imagefinderService.searchUrl(url, depth, imgRec));
         } finally {
             activeRequest.set(false);
         }

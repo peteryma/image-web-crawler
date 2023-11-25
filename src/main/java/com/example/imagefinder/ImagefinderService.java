@@ -2,6 +2,7 @@ package com.example.imagefinder;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,29 +20,40 @@ public class ImagefinderService {
         this.imagefinderRepository = imagefinderRepository;
     }
 
-    public List<ImageSearch> getSearches() {
-        return imagefinderRepository.findAllNames();
+    public List<ImageSearch> getResults() {
+        List<ImageSearch> results = imagefinderRepository.findAllNames();
+        Collections.reverse(results); 
+        return results;
     }
 
-    public ImageSearchResult getSearchResult(Long id) {
+    public ImageSearchResult getImage(Long id) {
         return imagefinderRepository.findById(id).orElseThrow(() -> 
                 new IllegalStateException("Search result with id " + id + " does not exist"));
     }
 
-    public String[] searchUrl(String url, Integer depth) {
+    public String[] searchUrl(String url, Integer depth, Boolean imgRec) {
         // crawl the url and get the images
 		WebCrawler crawler = new WebCrawler();
+        System.out.println("CRAWLING " + url + " with depth " + depth + " image recognition " + (imgRec ? "enabled" : "disabled"));
         crawler.startCrawl(url, depth);
         String[] imageUrls = crawler.getImageUrls();
 
-        // classify faces in the images
+        // classify faces and vectors in the images
 		ImageRecognizer recognizer = new ImageRecognizer();
 		ArrayList<String> faceUrls = new ArrayList<String>();
-		ArrayList<String> nonFaceUrls = new ArrayList<String>();
         ArrayList<String> svgUrls = new ArrayList<String>();
-		recognizer.recognizeFaces(imageUrls, faceUrls, nonFaceUrls, svgUrls);
+        ArrayList<String> restUrls = new ArrayList<String>();
 
-        ImageSearchResult imageSearchResult = new ImageSearchResult(url, depth, faceUrls, nonFaceUrls, svgUrls);
+        if (imgRec) {
+            System.out.println("Recognizing images for " + url);
+		    recognizer.recognizeFaces(imageUrls, faceUrls, svgUrls, restUrls);
+        } else {
+            for (String imageUrl : imageUrls) {
+                restUrls.add(imageUrl);
+            }
+        }
+
+        ImageSearchResult imageSearchResult = new ImageSearchResult(url, depth, imgRec, imageUrls.length, faceUrls, svgUrls, restUrls);
         imagefinderRepository.save(imageSearchResult);
 
         return imageUrls;

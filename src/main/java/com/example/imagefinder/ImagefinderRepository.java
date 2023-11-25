@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ImagefinderRepository extends JpaRepository<ImageSearchResult, Long>{
     
-    @Query("SELECT new com.example.imagefinder.ImageSearch(isr.url, isr.depth) FROM ImageSearchResult isr")
+    @Query("SELECT new com.example.imagefinder.ImageSearch(isr.id, isr.url, isr.depth, isr.imgRec, isr.numImages) FROM ImageSearchResult isr")
     List<ImageSearch> findAllNames();
 }
