@@ -42,10 +42,10 @@ public class RobotsTxtHandler {
                     }
                 }
             } else {
-                System.err.println("ERROR: Failed to fetch robots.txt, HTTP error code: " + responseCode);
+                System.err.println("ERROR Failed to fetch robots.txt, HTTP error code: " + responseCode);
             }
         } catch (IOException e) {
-            System.err.println("ERROR: Unable to fetch robots.txt: " + e.getMessage());
+            System.err.println("ERROR Unable to fetch robots.txt: " + e.getMessage());
         }
 
         return content.toString();

@@ -35,22 +35,27 @@ public class ImageSearchResult {
     @ElementCollection
     private List<String> nonFaceUrls = new ArrayList<String>();
 
+    @ElementCollection
+    private List<String> svgUrls = new ArrayList<String>();
+
     public ImageSearchResult() {
     }
 
-    public ImageSearchResult(Long id, String url, Integer depth, ArrayList<String> faceUrls, ArrayList<String> nonFaceUrls) {
+    public ImageSearchResult(Long id, String url, Integer depth, ArrayList<String> faceUrls, ArrayList<String> nonFaceUrls, ArrayList<String> svgUrls) {
         this.id = id;
         this.url = url;
         this.depth = depth;
         this.faceUrls = faceUrls;
         this.nonFaceUrls = nonFaceUrls;
+        this.svgUrls = svgUrls;
     }
 
-    public ImageSearchResult(String url, Integer depth, ArrayList<String> faceUrls, ArrayList<String> nonFaceUrls) {
+    public ImageSearchResult(String url, Integer depth, ArrayList<String> faceUrls, ArrayList<String> nonFaceUrls, ArrayList<String> svgUrls) {
         this.url = url;
         this.depth = depth;
         this.faceUrls = faceUrls;
         this.nonFaceUrls = nonFaceUrls;
+        this.svgUrls = svgUrls;
     }
 
     public String getUrl() {
@@ -84,6 +89,14 @@ public class ImageSearchResult {
     public void setNonFaceUrls(ArrayList<String> nonFaceUrls) {
         this.nonFaceUrls = nonFaceUrls;
     }
+
+    public List<String> getSvgUrls() {
+        return svgUrls;
+    }
+
+    public void setSvgUrls(ArrayList<String> svgUrls) {
+        this.svgUrls = svgUrls;
+    }
     
     @Override
     public String toString() {
@@ -93,6 +106,7 @@ public class ImageSearchResult {
                 ", depth=" + depth +
                 ", faceUrls=" + faceUrls +
                 ", nonFaceUrls=" + nonFaceUrls +
+                ", svgUrls=" + svgUrls +
                 '}';
     }
 }

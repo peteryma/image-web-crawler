@@ -73,7 +73,7 @@ public class WebCrawler {
         } catch (InterruptedException e) {
                 threadPool.shutdownNow();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("ERROR Unable to crawl URL: " + url);
         }
     }
 
@@ -110,12 +110,11 @@ public class WebCrawler {
                     }
                 }
             } catch (MalformedURLException e) {
-                System.err.println("ERROR: Invalid URL format: " + url);
+                System.err.println("ERROR Invalid URL format: " + url);
             } catch (IOException e) {
-                System.err.println("ERROR: Unable to access URL: " + url);
+                System.err.println("ERROR Unable to access URL: " + url);
             } catch (Exception e) {
-                System.err.println("ERROR: Unable to process URL: " + url);
-                e.printStackTrace();
+                System.err.println("ERROR Unable to process URL: " + url);
             } finally {
                 activeTaskCount.decrementAndGet();
             }
@@ -153,7 +152,7 @@ public class WebCrawler {
 
             return host.startsWith("www.") ? host.substring(4) : host;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("ERROR Unable to extract domain name from URL: " + url);
         }
         return "";
     }

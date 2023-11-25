@@ -22,10 +22,12 @@ public class ImageRecognizer {
         OpenCV.loadShared();
     }
 
-    public void recognizeFaces(String[] imageUrls, List<String> faceUrls, List<String> nonFaceUrls) {
+    public void recognizeFaces(String[] imageUrls, List<String> faceUrls, List<String> nonFaceUrls, List<String> svgUrls) {
 
         for (String imageUrl : imageUrls) {
-            if (isFace(imageUrl)) {
+            if (imageUrl.contains(".svg")) {
+                svgUrls.add(imageUrl);
+            } else if (isFace(imageUrl)) {
                 faceUrls.add(imageUrl);
             } else {
                 nonFaceUrls.add(imageUrl);
@@ -45,7 +47,7 @@ public class ImageRecognizer {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERORR downloading image: " + imageUrl);
             return false;
         }
 

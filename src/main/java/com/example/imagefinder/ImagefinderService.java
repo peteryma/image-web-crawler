@@ -38,9 +38,10 @@ public class ImagefinderService {
 		ImageRecognizer recognizer = new ImageRecognizer();
 		ArrayList<String> faceUrls = new ArrayList<String>();
 		ArrayList<String> nonFaceUrls = new ArrayList<String>();
-		recognizer.recognizeFaces(imageUrls, faceUrls, nonFaceUrls);
+        ArrayList<String> svgUrls = new ArrayList<String>();
+		recognizer.recognizeFaces(imageUrls, faceUrls, nonFaceUrls, svgUrls);
 
-        ImageSearchResult imageSearchResult = new ImageSearchResult(url, depth, faceUrls, nonFaceUrls);
+        ImageSearchResult imageSearchResult = new ImageSearchResult(url, depth, faceUrls, nonFaceUrls, svgUrls);
         imagefinderRepository.save(imageSearchResult);
 
         return imageUrls;
