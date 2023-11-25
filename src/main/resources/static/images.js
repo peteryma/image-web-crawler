@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const imagesId = urlParams.get("imagesId");
+  const url = urlParams.get("url");
+
+  document.getElementById("url").innerHTML = url;
 
   loadImages(imagesId, "all");
 

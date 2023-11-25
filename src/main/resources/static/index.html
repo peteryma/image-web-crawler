@@ -8,26 +8,33 @@
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <h1>Image Finder</h1>
+    <nav>
+      <h1>Image Finder</h1>
+    </nav>
 
     <div class="content">
-      <div class="input">
-        <form>
+      <form class="input">
+        <div class="input-container">
           <label for="url">URL:</label>
           <input
+            id="url"
             type="text"
             name="url"
             placeholder="https://example.com/"
             autofocus
           />
+        </div>
+        <div class="input-container">
           <label for="depth">Crawl Depth:</label>
           <input type="number" name="depth" value="0" />
           <label for="imgRec">Enable Image Recognition:</label>
           <input type="checkbox" name="imgRec" />
-        </form>
+        </div>
+      </form>
+      <div class="btn-container">
         <button type="button" id="search-btn">Search</button>
+        <button type="button" id="results-btn">View Processed Results</button>
       </div>
-      <button type="button" id="results-btn">View Processed Results</button>
       <div class="output">
         <ul class="results"></ul>
       </div>

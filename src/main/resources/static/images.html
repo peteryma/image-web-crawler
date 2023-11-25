@@ -4,21 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Finder</title>
-    <link rel="stylesheet" href="./images.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <script src="./images.js" defer></script>
   </head>
   <body>
-    <h1>Image Finder</h1>
-    <div id="url"></div>
-    <button type="button" id="home-btn">Search Home</button>
-    <button type="button" id="results-btn">Back to Results</button>
-    <label for="img-categories">Image Categories:</label>
-    <select id="img-categories" name="img-categories">
-      <option value="all">All Images</option>
-      <option value="frontal-faces">Frontal Faces</option>
-      <option value="vectors">Vectors</option>
-      <option value="uncategorized">Uncategorized</option>
-    </select>
-    <div id="gallery"></div>
+    <nav>
+      <h1>Image Finder</h1>
+    </nav>
+    <div class="content">
+      <div class="btn-container">
+        <button type="button" id="home-btn">Search Home</button>
+        <button type="button" id="results-btn">Back to Results</button>
+      </div>
+      <div id="url-link"></div>
+      <label for="img-categories">Image Categories:</label>
+      <select id="img-categories" name="img-categories">
+        <option value="all">All Images</option>
+        <option value="frontal-faces">Frontal Faces</option>
+        <option value="vectors">Vectors</option>
+        <option value="uncategorized">Uncategorized</option>
+      </select>
+      <div id="gallery"></div>
+    </div>
   </body>
 </html>
