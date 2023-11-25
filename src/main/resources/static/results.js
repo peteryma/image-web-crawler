@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch("/imagefinder/results")
     .then((response) => response.json())
     .then((searches) => {
-      const searchesList = document.querySelector("#searches");
+      const searchesList = document.querySelector(".results");
       searchesList.innerHTML = "";
 
       searches.forEach((search) => {
@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
         searchUrl.classList.add("search-url");
         searchUrl.innerHTML = search.url;
 
+        const searchInfo = document.createElement("div");
+        searchInfo.classList.add("search-info");
+
         const searchDepth = document.createElement("div");
         searchDepth.classList.add("search-depth");
         searchDepth.innerHTML = "Depth: " + search.depth;
@@ -35,9 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
         searchNumImages.innerHTML = "Number of Images: " + search.numImages;
 
         searchResult.appendChild(searchUrl);
-        searchResult.appendChild(searchDepth);
-        searchResult.appendChild(searchImgRec);
-        searchResult.appendChild(searchNumImages);
+        searchInfo.appendChild(searchDepth);
+        searchInfo.appendChild(searchImgRec);
+        searchInfo.appendChild(searchNumImages);
+        searchResult.appendChild(searchInfo);
 
         searchesList.appendChild(searchResult);
       });

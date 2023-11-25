@@ -20,6 +20,10 @@
   font-size: 20px;
 }
 
+div {
+  background: none;
+}
+
 .content {
   color: var(--dark-text);
   padding: 2rem;
@@ -108,6 +112,49 @@ nav * {
   margin-bottom: 20px;
 }
 
+#img-categories {
+  margin-bottom: 20px;
+}
+
 #url-link {
   color: var(--blue);
+}
+
+img {
+  width: 200px;
+  border: solid var(--dark-background);
+}
+
+.output {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-gap: 20px;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 2em;
+}
+
+.search-result {
+  border: solid var(--dark-background);
+  border-radius: 30px;
+  background: rgb(233, 235, 243);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-url {
+  font-size: 24px;
+}
+
+.search-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-result:hover {
+  cursor: pointer;
+  color: var(--blue);
+  transform: scale(1.02);
 }

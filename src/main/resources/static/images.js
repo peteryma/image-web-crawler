@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const imagesId = urlParams.get("imagesId");
-  const url = urlParams.get("url");
-
-  document.getElementById("url").innerHTML = url;
 
   loadImages(imagesId, "all");
 
@@ -17,12 +14,17 @@ function loadImages(imagesId, category) {
   fetch(`/imagefinder/images/${imagesId}`)
     .then((response) => response.json())
     .then((imageSearchResult) => {
+      document.getElementById("url-link").innerHTML = imageSearchResult.url;
+
       const gallery = document.getElementById("gallery");
       gallery.innerHTML = "";
 
-      if (category === "frontal-faces" || category === "all") {
+      if (
+        imageSearchResult.faceUrls.length !== 0 &&
+        (category === "frontal-faces" || category === "all")
+      ) {
         const faceImages = document.createElement("div");
-        faceImages.classList.add("frontal-faces-images");
+        faceImages.classList.add("output", "frontal-faces-images");
 
         imageSearchResult.faceUrls.forEach((image) => {
           const img = document.createElement("img");
@@ -33,9 +35,12 @@ function loadImages(imagesId, category) {
         gallery.appendChild(faceImages);
       }
 
-      if (category === "vectors" || category === "all") {
+      if (
+        imageSearchResult.svgUrls.length !== 0 &&
+        (category === "vectors" || category === "all")
+      ) {
         const vectorImages = document.createElement("div");
-        vectorImages.classList.add("vectors-images");
+        vectorImages.classList.add("output", "vectors-images");
 
         imageSearchResult.svgUrls.forEach((image) => {
           const img = document.createElement("img");
@@ -46,9 +51,12 @@ function loadImages(imagesId, category) {
         gallery.appendChild(vectorImages);
       }
 
-      if (category === "uncategorized" || category === "all") {
+      if (
+        imageSearchResult.restImages.length !== 0 &&
+        (category === "uncategorized" || category === "all")
+      ) {
         const restImages = document.createElement("div");
-        restImages.classList.add("rest-images");
+        restImages.classList.add("output", "rest-images");
 
         imageSearchResult.restImages.forEach((image) => {
           const img = document.createElement("img");

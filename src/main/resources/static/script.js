@@ -1,4 +1,4 @@
-var resultList = document.querySelector("ul.results");
+var resultList = document.querySelector(".output");
 var urlInput = document.querySelector("input[name=url]");
 var depthInput = document.querySelector("input[name=depth]");
 var imgRec = document.querySelector("input[name=imgRec]");
