@@ -2,6 +2,10 @@ var resultList = document.querySelector(".output");
 var urlInput = document.querySelector("input[name=url]");
 var depthInput = document.querySelector("input[name=depth]");
 var imgRec = document.querySelector("input[name=imgRec]");
+var loaderContainer = document.querySelector(".loader-container");
+
+const loader = document.createElement("div");
+loader.classList.add("loader");
 
 apiCallBack = function (xhr, callback) {
   if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -19,6 +23,8 @@ apiCallBack = function (xhr, callback) {
 
 updateList = function (response) {
   resultList.innerHTML = "";
+  loaderContainer.removeChild(loader);
+
   for (var i = 0; i < response.length; i++) {
     var img = document.createElement("img");
     img.width = 200;
@@ -28,6 +34,9 @@ updateList = function (response) {
 };
 
 makeApiCall = function (url, method, obj, callback) {
+  resultList.innerHTML = "";
+  loaderContainer.appendChild(loader);
+
   let xhr = new XMLHttpRequest();
   xhr.open(method, url);
   xhr.onreadystatechange = apiCallBack.bind(null, xhr, callback);

@@ -7,6 +7,7 @@
   --dark-background: rgb(30, 45, 60);
   --white: rgb(255, 255, 255);
   --blue: rgb(5, 125, 170);
+  --gray: rgb(233, 235, 243);
 }
 
 * {
@@ -48,7 +49,7 @@ h2 {
 
 input,
 select {
-  background-color: rgb(233, 235, 243);
+  background-color: var(--gray);
   border-radius: 30px;
   border: none;
   outline: none;
@@ -137,7 +138,7 @@ img {
 .search-result {
   border: solid var(--dark-background);
   border-radius: 30px;
-  background: rgb(233, 235, 243);
+  background: var(--gray);
   margin-bottom: 20px;
   padding: 20px;
   transition: all 0.3s ease-in-out;
@@ -157,4 +158,28 @@ img {
   cursor: pointer;
   color: var(--blue);
   transform: scale(1.02);
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 16px solid var(--gray);
+  border-top: 16px solid var(--blue);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
