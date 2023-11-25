@@ -41,11 +41,11 @@ public class ImageRecognizer {
                 activeTaskCount.incrementAndGet();
 
                 if (imageUrl.contains(".svg")) {
-                    svgUrls.add(imageUrl);
+                    synchronizedSvgUrls.add(imageUrl);
                 } else if (isFace(imageUrl)) {
-                    faceUrls.add(imageUrl);
+                    synchronizedFaceUrls.add(imageUrl);
                 } else {
-                    nonFaceUrls.add(imageUrl);
+                    synchronizedNonFaceUrls.add(imageUrl);
                 }
 
                 activeTaskCount.decrementAndGet();
