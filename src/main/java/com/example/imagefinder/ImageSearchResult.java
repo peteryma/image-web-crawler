@@ -3,6 +3,7 @@ package com.example.imagefinder;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,34 +29,47 @@ public class ImageSearchResult {
     private Long id;
     private String url;
     private Integer depth;
+    private Boolean imgRec;
+    private Integer numImages;
 
     @ElementCollection
+    @Column(length=1023)
     private List<String> faceUrls = new ArrayList<String>();
-    
-    @ElementCollection
-    private List<String> nonFaceUrls = new ArrayList<String>();
 
     @ElementCollection
+    @Column(length=1023)
     private List<String> svgUrls = new ArrayList<String>();
+
+    @ElementCollection
+    @Column(length=1023)
+    private List<String> restImages = new ArrayList<String>();
 
     public ImageSearchResult() {
     }
 
-    public ImageSearchResult(Long id, String url, Integer depth, ArrayList<String> faceUrls, ArrayList<String> nonFaceUrls, ArrayList<String> svgUrls) {
+    public ImageSearchResult(Long id, String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
         this.id = id;
         this.url = url;
         this.depth = depth;
+        this.imgRec = imgRec;
+        this.numImages = numImages;
         this.faceUrls = faceUrls;
-        this.nonFaceUrls = nonFaceUrls;
         this.svgUrls = svgUrls;
+        this.restImages = restImages;
     }
 
-    public ImageSearchResult(String url, Integer depth, ArrayList<String> faceUrls, ArrayList<String> nonFaceUrls, ArrayList<String> svgUrls) {
+    public ImageSearchResult(String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
         this.url = url;
         this.depth = depth;
+        this.imgRec = imgRec;
+        this.numImages = numImages;
         this.faceUrls = faceUrls;
-        this.nonFaceUrls = nonFaceUrls;
         this.svgUrls = svgUrls;
+        this.restImages = restImages;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public String getUrl() {
@@ -74,20 +88,28 @@ public class ImageSearchResult {
         this.depth = depth;
     }
 
+    public Boolean getImgRec() {
+        return imgRec;
+    }
+
+    public void setImgRec(Boolean imgRec) {
+        this.imgRec = imgRec;
+    }
+
+    public Integer getNumImages() {
+        return numImages;
+    }
+
+    public void setNumImages(Integer numImages) {
+        this.numImages = numImages;
+    }
+
     public List<String> getFaceUrls() {
         return faceUrls;
     }
 
     public void setFaceUrls(ArrayList<String> faceUrls) {
         this.faceUrls = faceUrls;
-    }
-
-    public List<String> getNonFaceUrls() {
-        return nonFaceUrls;
-    }
-
-    public void setNonFaceUrls(ArrayList<String> nonFaceUrls) {
-        this.nonFaceUrls = nonFaceUrls;
     }
 
     public List<String> getSvgUrls() {
@@ -97,6 +119,14 @@ public class ImageSearchResult {
     public void setSvgUrls(ArrayList<String> svgUrls) {
         this.svgUrls = svgUrls;
     }
+
+    public List<String> getRestImages() {
+        return restImages;
+    }
+
+    public void setRestImages(ArrayList<String> restImages) {
+        this.restImages = restImages;
+    }
     
     @Override
     public String toString() {
@@ -104,9 +134,11 @@ public class ImageSearchResult {
                 "id=" + id +
                 ", url='" + url + '\'' +
                 ", depth=" + depth +
+                ", imgRec=" + imgRec +
+                ", numImages=" + numImages +
                 ", faceUrls=" + faceUrls +
-                ", nonFaceUrls=" + nonFaceUrls +
                 ", svgUrls=" + svgUrls +
+                ", restImages=" + restImages +
                 '}';
     }
 }
