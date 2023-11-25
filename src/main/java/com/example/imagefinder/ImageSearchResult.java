@@ -1,7 +1,9 @@
 package com.example.imagefinder;
 
+import java.util.List;
 import java.util.ArrayList;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +28,12 @@ public class ImageSearchResult {
     private Long id;
     private String url;
     private Integer depth;
-    private ArrayList<String> faceUrls;
-    private ArrayList<String> nonFaceUrls;
+
+    @ElementCollection
+    private List<String> faceUrls = new ArrayList<String>();
+    
+    @ElementCollection
+    private List<String> nonFaceUrls = new ArrayList<String>();
 
     public ImageSearchResult() {
     }
@@ -63,7 +69,7 @@ public class ImageSearchResult {
         this.depth = depth;
     }
 
-    public ArrayList<String> getFaceUrls() {
+    public List<String> getFaceUrls() {
         return faceUrls;
     }
 
@@ -71,7 +77,7 @@ public class ImageSearchResult {
         this.faceUrls = faceUrls;
     }
 
-    public ArrayList<String> getNonFaceUrls() {
+    public List<String> getNonFaceUrls() {
         return nonFaceUrls;
     }
 

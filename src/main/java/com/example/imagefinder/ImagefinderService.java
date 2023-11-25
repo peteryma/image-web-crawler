@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.imagefinder.webcrawler.WebCrawler;
+import com.example.imagefinder.webcrawler.ImageRecognizer;
+
 @Service
 public class ImagefinderService {
     
@@ -26,18 +29,20 @@ public class ImagefinderService {
     }
 
     public String[] searchUrl(String url, Integer depth) {
-        String[] result = new String[2];
-        result[0] = "https://www.google.com/searchbyimage?&image_url=" + url;
-        result[1] = "https://yandex.com/images/search?source=collections&url=" + url;
+        // crawl the url and get the images
+		WebCrawler crawler = new WebCrawler();
+        crawler.startCrawl(url, depth);
+        String[] imageUrls = crawler.getImageUrls();
 
-        ArrayList<String> faceUrls = new ArrayList<String>();
+        // classify faces in the images
+		ImageRecognizer recognizer = new ImageRecognizer();
+		ArrayList<String> faceUrls = new ArrayList<String>();
 		ArrayList<String> nonFaceUrls = new ArrayList<String>();
-        faceUrls.add("https://www.google.com/searchbyimage?&image_url=" + url);
-        nonFaceUrls.add("https://yandex.com/images/search?source=collections&url=" + url);
+		recognizer.recognizeFaces(imageUrls, faceUrls, nonFaceUrls);
 
         ImageSearchResult imageSearchResult = new ImageSearchResult(url, depth, faceUrls, nonFaceUrls);
         imagefinderRepository.save(imageSearchResult);
 
-        return result;
+        return imageUrls;
     }
 }
