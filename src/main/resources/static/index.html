@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Finder</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <h1>Image Finder</h1>
+
+    <div class="content">
+      <div class="input">
+        <form>
+          <label for="url">URL:</label>
+          <input
+            type="text"
+            name="url"
+            placeholder="https://example.com/"
+            autofocus
+          />
+          <label for="depth">Crawl Depth:</label>
+          <input type="number" name="depth" value="0" />
+          <label for="imgRec">Enable Image Recognition:</label>
+          <input type="checkbox" name="imgRec" />
+        </form>
+        <button type="button" id="search-btn">Search</button>
+      </div>
+      <button type="button" id="results-btn">View Processed Results</button>
+      <div class="output">
+        <ul class="results"></ul>
+      </div>
+    </div>
+  </body>
+</html>
