@@ -53,6 +53,11 @@ document
   .querySelector("#search-btn")
   .addEventListener("click", function (event) {
     event.preventDefault();
+
+    if (depthInput.value == "") {
+      depthInput.value = 0;
+    }
+
     makeApiCall(
       "/imagefinder?url=" +
         urlInput.value +
