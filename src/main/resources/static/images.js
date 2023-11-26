@@ -1,9 +1,13 @@
+// When window first loads call GET /imagefinder/images/{id} and display the
+// processed images for the given search
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const imagesId = urlParams.get("imagesId");
 
+  // load all images by default
   loadImages(imagesId, "all");
 
+  // on change of the image categories dropdown, reload the images
   const imgCategories = document.getElementById("img-categories");
   imgCategories.addEventListener("change", function () {
     loadImages(imagesId, this.value);
@@ -19,6 +23,7 @@ function loadImages(imagesId, category) {
       const gallery = document.getElementById("gallery");
       gallery.innerHTML = "";
 
+      // display frontal faces images
       if (
         imageSearchResult.faceUrls.length !== 0 &&
         (category === "frontal-faces" || category === "all")
@@ -35,6 +40,7 @@ function loadImages(imagesId, category) {
         gallery.appendChild(faceImages);
       }
 
+      // display vector images
       if (
         imageSearchResult.svgUrls.length !== 0 &&
         (category === "vectors" || category === "all")
@@ -51,6 +57,7 @@ function loadImages(imagesId, category) {
         gallery.appendChild(vectorImages);
       }
 
+      // display uncategorized images
       if (
         imageSearchResult.uncategorizedUrls.length !== 0 &&
         (category === "uncategorized" || category === "all")

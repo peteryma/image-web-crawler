@@ -35,6 +35,7 @@ updateList = function (response) {
 
 makeApiCall = function (url, method, obj, callback) {
   resultList.innerHTML = "";
+  // display a spinning loader while waiting for the API call to complete
   loaderContainer.appendChild(loader);
 
   let xhr = new XMLHttpRequest();
@@ -58,6 +59,7 @@ document
       depthInput.value = 0;
     }
 
+    // POST /imagefinder/ with the given url, depth, and imgRec
     makeApiCall(
       "/imagefinder?url=" +
         urlInput.value +
@@ -71,7 +73,6 @@ document
     );
   });
 
-// when the searches-btn button is clicked, redirect to the searches page
 document.querySelector("#results-btn").addEventListener("click", () => {
   window.location.href = "results.html";
 });
