@@ -7,9 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ImagefinderRepository extends JpaRepository<ImageSearchEntity, Long>{
+public interface ImageFinderRepository extends 
+                 JpaRepository<ImageSearchEntity, Long>{
     
-    @Query("SELECT new com.example.imagefinder.SearchResult(isr.id, isr.url, isr.depth, isr.imgRec, isr.numImages) FROM ImageSearchEntity isr")
-    List<SearchResult> findAllNames();
+    @Query("SELECT new com.example.imagefinder.SearchResult(isr.id, isr.url, " 
+                                    + "isr.depth, isr.imgRec, isr.numImages) " 
+                                    + "FROM ImageSearchEntity isr")
+    List<SearchResult> findAllSearchResults();
 }
  

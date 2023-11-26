@@ -42,12 +42,15 @@ public class ImageSearchEntity {
 
     @ElementCollection
     @Column(length=1023)
-    private List<String> restUrls = new ArrayList<String>();
+    private List<String> uncategorizedUrls = new ArrayList<String>();
 
     public ImageSearchEntity() {
     }
 
-    public ImageSearchEntity(Long id, String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restUrls) {
+    public ImageSearchEntity(Long id, String url, Integer depth, Boolean imgRec,
+                             Integer numImages, ArrayList<String> faceUrls, 
+                             ArrayList<String> svgUrls, 
+                             ArrayList<String> uncategorizedUrls) {
         this.id = id;
         this.url = url;
         this.depth = depth;
@@ -55,17 +58,20 @@ public class ImageSearchEntity {
         this.numImages = numImages;
         this.faceUrls = faceUrls;
         this.svgUrls = svgUrls;
-        this.restUrls = restUrls;
+        this.uncategorizedUrls = uncategorizedUrls;
     }
 
-    public ImageSearchEntity(String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restUrls) {
+    public ImageSearchEntity(String url, Integer depth, Boolean imgRec, 
+                             Integer numImages, ArrayList<String> faceUrls, 
+                             ArrayList<String> svgUrls, 
+                             ArrayList<String> uncategorizedUrls) {
         this.url = url;
         this.depth = depth;
         this.imgRec = imgRec;
         this.numImages = numImages;
         this.faceUrls = faceUrls;
         this.svgUrls = svgUrls;
-        this.restUrls = restUrls;
+        this.uncategorizedUrls = uncategorizedUrls;
     }
 
     public Long getId() {
@@ -120,12 +126,12 @@ public class ImageSearchEntity {
         this.svgUrls = svgUrls;
     }
 
-    public List<String> getRestUrls() {
-        return restUrls;
+    public List<String> getUncategorizedUrls() {
+        return uncategorizedUrls;
     }
 
-    public void setRestUrls(ArrayList<String> restUrls) {
-        this.restUrls = restUrls;
+    public void setUncategorizedUrls(ArrayList<String> restUrls) {
+        this.uncategorizedUrls = restUrls;
     }
     
     @Override
@@ -138,7 +144,7 @@ public class ImageSearchEntity {
                 ", numImages=" + numImages +
                 ", faceUrls=" + faceUrls +
                 ", svgUrls=" + svgUrls +
-                ", restUrls=" + restUrls +
+                ", uncategorizedUrls=" + uncategorizedUrls +
                 '}';
     }
 }

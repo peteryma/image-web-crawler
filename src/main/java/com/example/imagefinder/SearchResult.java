@@ -11,7 +11,8 @@ public class SearchResult {
     public SearchResult() {
     }
 
-    public SearchResult(Long id, String url, Integer depth, Boolean imgRec, Integer numImages) {
+    public SearchResult(Long id, String url, Integer depth, Boolean imgRec, 
+                        Integer numImages) {
         this.id = id;
         this.url = url;
         this.depth = depth;
