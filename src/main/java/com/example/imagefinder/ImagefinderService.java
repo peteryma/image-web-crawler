@@ -20,13 +20,13 @@ public class ImagefinderService {
         this.imagefinderRepository = imagefinderRepository;
     }
 
-    public List<ImageSearch> getResults() {
-        List<ImageSearch> results = imagefinderRepository.findAllNames();
+    public List<SearchResult> getResults() {
+        List<SearchResult> results = imagefinderRepository.findAllNames();
         Collections.reverse(results); 
         return results;
     }
 
-    public ImageSearchResult getImage(Long id) {
+    public ImageSearchEntity getImage(Long id) {
         return imagefinderRepository.findById(id).orElseThrow(() -> 
                 new IllegalStateException("Search result with id " + id + " does not exist"));
     }
@@ -53,8 +53,8 @@ public class ImagefinderService {
             }
         }
 
-        ImageSearchResult imageSearchResult = new ImageSearchResult(url, depth, imgRec, imageUrls.length, faceUrls, svgUrls, restUrls);
-        imagefinderRepository.save(imageSearchResult);
+        ImageSearchEntity imageSearchEntity = new ImageSearchEntity(url, depth, imgRec, imageUrls.length, faceUrls, svgUrls, restUrls);
+        imagefinderRepository.save(imageSearchEntity);
 
         return imageUrls;
     }

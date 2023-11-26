@@ -1,6 +1,6 @@
 package com.example.imagefinder;
 
-public class ImageSearch {
+public class SearchResult {
 
     private Long id;
     private String url;
@@ -8,10 +8,10 @@ public class ImageSearch {
     private Boolean imgRec;
     private Integer numImages;
 
-    public ImageSearch() {
+    public SearchResult() {
     }
 
-    public ImageSearch(Long id, String url, Integer depth, Boolean imgRec, Integer numImages) {
+    public SearchResult(Long id, String url, Integer depth, Boolean imgRec, Integer numImages) {
         this.id = id;
         this.url = url;
         this.depth = depth;
@@ -57,7 +57,7 @@ public class ImageSearch {
     
     @Override
     public String toString() {
-        return "ImageSearchResult{" +
+        return "SearchResult{" +
                 "id=" + id +
                 ", url='" + url + '\'' +
                 ", depth=" + depth +

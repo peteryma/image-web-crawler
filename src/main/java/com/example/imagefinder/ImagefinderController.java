@@ -20,12 +20,12 @@ public class ImagefinderController {
     }
 
     @GetMapping("/results")
-    public List<ImageSearch> getResults() {
+    public List<SearchResult> getResults() {
         return imagefinderService.getResults();
     }
 
     @GetMapping("/images/{id}")
-    public ImageSearchResult getImage(@PathVariable Long id) {
+    public ImageSearchEntity getImage(@PathVariable Long id) {
         return imagefinderService.getImage(id);
     }
 

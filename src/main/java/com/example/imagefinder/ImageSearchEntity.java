@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @Table
-public class ImageSearchResult {
+public class ImageSearchEntity {
     @Id
     @SequenceGenerator(
         name = "imagefinder_sequence",
@@ -44,10 +44,10 @@ public class ImageSearchResult {
     @Column(length=1023)
     private List<String> restImages = new ArrayList<String>();
 
-    public ImageSearchResult() {
+    public ImageSearchEntity() {
     }
 
-    public ImageSearchResult(Long id, String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
+    public ImageSearchEntity(Long id, String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
         this.id = id;
         this.url = url;
         this.depth = depth;
@@ -58,7 +58,7 @@ public class ImageSearchResult {
         this.restImages = restImages;
     }
 
-    public ImageSearchResult(String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
+    public ImageSearchEntity(String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
         this.url = url;
         this.depth = depth;
         this.imgRec = imgRec;
@@ -130,7 +130,7 @@ public class ImageSearchResult {
     
     @Override
     public String toString() {
-        return "ImageSearchResult{" +
+        return "ImageSearchEntity{" +
                 "id=" + id +
                 ", url='" + url + '\'' +
                 ", depth=" + depth +
