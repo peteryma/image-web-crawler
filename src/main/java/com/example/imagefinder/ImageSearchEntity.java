@@ -42,12 +42,12 @@ public class ImageSearchEntity {
 
     @ElementCollection
     @Column(length=1023)
-    private List<String> restImages = new ArrayList<String>();
+    private List<String> restUrls = new ArrayList<String>();
 
     public ImageSearchEntity() {
     }
 
-    public ImageSearchEntity(Long id, String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
+    public ImageSearchEntity(Long id, String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restUrls) {
         this.id = id;
         this.url = url;
         this.depth = depth;
@@ -55,17 +55,17 @@ public class ImageSearchEntity {
         this.numImages = numImages;
         this.faceUrls = faceUrls;
         this.svgUrls = svgUrls;
-        this.restImages = restImages;
+        this.restUrls = restUrls;
     }
 
-    public ImageSearchEntity(String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restImages) {
+    public ImageSearchEntity(String url, Integer depth, Boolean imgRec, Integer numImages, ArrayList<String> faceUrls, ArrayList<String> svgUrls, ArrayList<String> restUrls) {
         this.url = url;
         this.depth = depth;
         this.imgRec = imgRec;
         this.numImages = numImages;
         this.faceUrls = faceUrls;
         this.svgUrls = svgUrls;
-        this.restImages = restImages;
+        this.restUrls = restUrls;
     }
 
     public Long getId() {
@@ -120,12 +120,12 @@ public class ImageSearchEntity {
         this.svgUrls = svgUrls;
     }
 
-    public List<String> getRestImages() {
-        return restImages;
+    public List<String> getRestUrls() {
+        return restUrls;
     }
 
-    public void setRestImages(ArrayList<String> restImages) {
-        this.restImages = restImages;
+    public void setRestUrls(ArrayList<String> restUrls) {
+        this.restUrls = restUrls;
     }
     
     @Override
@@ -138,7 +138,7 @@ public class ImageSearchEntity {
                 ", numImages=" + numImages +
                 ", faceUrls=" + faceUrls +
                 ", svgUrls=" + svgUrls +
-                ", restImages=" + restImages +
+                ", restUrls=" + restUrls +
                 '}';
     }
 }

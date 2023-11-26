@@ -52,19 +52,19 @@ function loadImages(imagesId, category) {
       }
 
       if (
-        imageSearchResult.restImages.length !== 0 &&
+        imageSearchResult.restUrls.length !== 0 &&
         (category === "uncategorized" || category === "all")
       ) {
-        const restImages = document.createElement("div");
-        restImages.classList.add("output", "rest-images");
+        const restUrls = document.createElement("div");
+        restUrls.classList.add("output", "rest-images");
 
-        imageSearchResult.restImages.forEach((image) => {
+        imageSearchResult.restUrls.forEach((image) => {
           const img = document.createElement("img");
           img.src = image;
-          restImages.appendChild(img);
+          restUrls.appendChild(img);
         });
 
-        gallery.appendChild(restImages);
+        gallery.appendChild(restUrls);
       }
     })
     .catch((error) => {
