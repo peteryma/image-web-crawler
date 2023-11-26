@@ -96,6 +96,7 @@ http://books.toscrape.com/index.html
 - Without image recognition enabled, this took ~10 seconds on my laptop.
 - With image recognition enabled, this took under 2 minutes on my laptop.
 - Frontal faces were for the most part correctly categorized. See note (1) below for additional comments.
+- Also note that some images that appear to be duplicated are due to sub-pages containing the same images as each other.
 
 https://en.wikipedia.org/wiki/US_Open_(tennis)
 
