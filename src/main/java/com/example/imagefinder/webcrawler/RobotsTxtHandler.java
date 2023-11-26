@@ -15,7 +15,9 @@ public class RobotsTxtHandler {
     public BaseRobotRules getRulesForDomain(String url, String userAgent) {
         String robotsTxtUrl = url + "/robots.txt";
         String content = fetchContent(robotsTxtUrl);
-        return robotRulesParser.parseContent(robotsTxtUrl, content.getBytes(), "text/plain", userAgent);
+
+        return robotRulesParser.parseContent(robotsTxtUrl, content.getBytes(), 
+                                 "text/plain", userAgent);
     }
 
     private String fetchContent(String robotsTxtUrl) {
@@ -34,27 +36,26 @@ public class RobotsTxtHandler {
 
             // Check for successful response
             int responseCode = connection.getResponseCode();
+
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                try (BufferedReader reader = new BufferedReader(
+                                             new InputStreamReader(
+                                             connection.getInputStream()))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         content.append(line).append("\n");
                     }
                 }
+
             } else {
-                System.err.println("ERROR Failed to fetch robots.txt, HTTP error code: " + responseCode);
+                System.err.println("ERROR Failed to fetch robots.txt, "
+                                 + "HTTP error code: " + responseCode);
             }
         } catch (IOException e) {
-            System.err.println("ERROR Unable to fetch robots.txt: " + e.getMessage());
+            System.err.println("ERROR Unable to fetch robots.txt: " 
+                             + e.getMessage());
         }
 
         return content.toString();
-    }
-
-    // test getting robots.txt
-    public static void main(String[] args) {
-        RobotsTxtHandler handler = new RobotsTxtHandler();
-        BaseRobotRules rules = handler.getRulesForDomain("https://en.wikipedia.org", "MyWebCrawler/1.0 (+http://www.mywebsite.com/crawler)");
-        System.out.println(rules);
     }
 }

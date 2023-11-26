@@ -21,31 +21,34 @@ import nu.pattern.OpenCV;
 
 public class ImageRecognizer {
     
-    private String resourcesPath = System.getProperty("user.dir") + "/src/main/java/com/example/imagefinder/webcrawler";
+    private String resourcesPath = System.getProperty("user.dir") 
+                        + "/src/main/java/com/example/imagefinder/webcrawler";
 
     public ImageRecognizer() {
         OpenCV.loadShared();
     }
 
-    public void recognizeFaces(String[] imageUrls, List<String> faceUrls, List<String> svgUrls, List<String> restUrls) {
+    public void recognizeImages(String[] imageUrls, List<String> faceUrls, 
+                                List<String> svgUrls, 
+                                List<String> uncategorizedUrls) {
         ExecutorService threadPool = Executors.newFixedThreadPool(10);
         AtomicInteger activeTaskCount = new AtomicInteger(0);
 
         List<String> synchronizedFaceUrls = Collections.synchronizedList(faceUrls);
         List<String> synchronizedSvgUrls = Collections.synchronizedList(svgUrls);
-        List<String> synchronizedRestUrls = Collections.synchronizedList(restUrls);
+        List<String> synchronizedUncategorizedUrls = Collections.synchronizedList(uncategorizedUrls);
 
-
+        // Using threads, classify each image into frontal faces, vectors, or uncategorized
         for (String imageUrl : imageUrls) {
             threadPool.submit(() -> {
                 activeTaskCount.incrementAndGet();
 
                 if (imageUrl.contains(".svg")) {
                     synchronizedSvgUrls.add(imageUrl);
-                } else if (isFace(imageUrl)) {
+                } else if (isFrontalFace(imageUrl)) {
                     synchronizedFaceUrls.add(imageUrl);
                 } else {
-                    synchronizedRestUrls.add(imageUrl);
+                    synchronizedUncategorizedUrls.add(imageUrl);
                 }
 
                 activeTaskCount.decrementAndGet();
@@ -67,13 +70,15 @@ public class ImageRecognizer {
         }
     }
 
-    private boolean isFace(String imageUrl) {
+    private boolean isFrontalFace(String imageUrl) {
+        // create a temporary file to store the image, unique so threads don't clash
         String tempFileName = "/" + java.util.UUID.randomUUID().toString() + ".jpg";
 
         try {
             URL url = new URL(imageUrl);
 
-            try (InputStream is = url.openStream(); OutputStream os = new FileOutputStream(resourcesPath + tempFileName)) {
+            try (InputStream is = url.openStream(); 
+                 OutputStream os = new FileOutputStream(resourcesPath + tempFileName)) {
                 byte[] buffer = new byte[2048];
                 int bytesRead;
 
@@ -82,12 +87,14 @@ public class ImageRecognizer {
                 }
             }
 
+            // classify the image
             Mat image = Imgcodecs.imread(resourcesPath + tempFileName);
             Mat grayImage = new Mat();
             Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
 
             MatOfRect faces = new MatOfRect();
-            CascadeClassifier faceDetector = new CascadeClassifier(resourcesPath + "/haarcascade_frontalface_alt.xml");
+            CascadeClassifier faceDetector = new CascadeClassifier(resourcesPath 
+                                          + "/haarcascade_frontalface_alt.xml");
             faceDetector.detectMultiScale(grayImage, faces);
 
             return faces.toArray().length > 0;

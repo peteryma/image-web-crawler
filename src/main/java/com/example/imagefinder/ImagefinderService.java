@@ -50,7 +50,7 @@ public class ImageFinderService {
 
         if (imgRec) {
             System.out.println("Recognizing images for " + url);
-		    recognizer.recognizeFaces(imageUrls, faceUrls, svgUrls, 
+		    recognizer.recognizeImages(imageUrls, faceUrls, svgUrls, 
                                       uncategorizedUrls);
         } else {
             for (String imageUrl : imageUrls) {
