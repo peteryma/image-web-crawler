@@ -1,6 +1,4 @@
-# Peter Ma - Eulerity ImageFinder Hackathon Challenge
-
-My finished implementation of the ImageFinder web application is contained here. In this README, I am providing a brief overview as well as some notes about my project.
+# ImageFinder Web Crawler
 
 `Java 8` and `Maven 3.9.5` were used.
 
@@ -19,16 +17,8 @@ To run the project:
 The server runs on `localhost:8080`.
 
 ## Features
-
-In addition to the required features, I included some extra functionality as follows:
-
-Required
-
 - Crawls a web page as well as all its sub-pages within the same domain without revisiting any to find all images.
 - Multi-threaded to perform multiple sub-page crawls at a time.
-
-Extra
-
 - Database integration and data persistence.
 - Friendly crawler that retrieves and respects robots.txt. Also implements crawl delays and rotates user agents.
 - Image recognition for frontal faces (1).
@@ -36,9 +26,6 @@ Extra
 - Basic front-end development for a better user experience.
 
 ## Structure
-
-In working on this, I divided the project into a few tasks as follows:
-
 1. Setting up the framework
 2. Implementing the backend
 3. Creating the web crawler
@@ -46,7 +33,7 @@ In working on this, I divided the project into a few tasks as follows:
 
 ### Setting up the framework
 
-For the framework, I decided to use Spring Boot to build the application. This allowed for easier development of the backend as well as integration with a database(2).
+Spring Boot was used to build the application for easier development of the backend as well as integration with a database(2).
 
 ### Implementing the backend
 
@@ -76,7 +63,7 @@ The web crawler and logic related to it is located in the `webcrawler/` director
 
 ### Implementing the frontend
 
-For the frontend, I created a simple interface with 3 pages (4). These are located in `src/main/resources/static/`.
+The frontend includes a simple interface with 3 pages (4). These are located in `src/main/resources/static/`.
 
 - `index.html` and `script.js`: main landing page for searches, the user specifies the url they want to search, the depth of the crawl, and whether or not they want to enable image recognition. The initial image results are returned and displayed here.
 - `results.html` and `results.js`: lists completed searches for processed images.
@@ -108,6 +95,6 @@ https://en.wikipedia.org/wiki/US_Open_(tennis)
 ## Notes
 
 1. Frontal faces was chosen to be categorized because a pretrained classifier model exists and could be easily accessed (`haarcascade_frontalface_alt.xml` file located in the `webcrawler/` directory). Additional image categories can be easily implemented by using other classifiers. For the most part, these frontal faces can be correctly identified. There seems to be cases of false negatives more so than false positives. Faces that are clear and facing forwards are for the most part correctly identified, but if a face is slightly tilted, rotated to one side, or not very clear, then it is not recognized. This makes sense if the classifier was trained on exactly straight, front facing, and clear faces. Any misalignment would not match up with the filter features and therefore lead to a false negative.
-2. For the database, I used H2 Database for demonstration purposes. However, it is currently configurered as an in-memory database, so for an actual application I would instead use a disk-based persistent database such as PostgreSQL.
+2. For the database, H2 Database was used for demonstration purposes. However, it is currently configurered as an in-memory database, so an actual application would instead use a disk-based persistent database such as PostgreSQL.
 3. A few user agents were arbitrarily picked for demonstration purposes and listed in `user-agents.txt`. Additional user agents could be used by adding them to the file.
-4. For an actual web application, I would use React instead for more functionality and flexibility.
+4. For an actual web application, React would be used instead for more functionality and flexibility.
